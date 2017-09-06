@@ -7,7 +7,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {<div className="App-header">
+        <div className="App-header">
           <h2>Welcome to React, {this.props.name}</h2>
         </div>
       </div>
@@ -28,7 +28,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
 const propTypes = {
-  name: PropTypes.string.isRequired;
+  name: PropTypes.string.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

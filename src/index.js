@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
-import createStore from 'redux';
-import appReducer fom './containers/App/appReducer';
+import { createStore, combineReducers } from 'redux';
+import appReducer from './containers/App/appReducer';
 
 const rootReducer = combineReducers({
   app: appReducer,
@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
 const store = createStore(rootReducer);
 
 ReactDOM.render((
-  <Provider store={}>
+  <Provider store={store}>
     <App />
   </Provider>
 ), document.getElementById('root'));
