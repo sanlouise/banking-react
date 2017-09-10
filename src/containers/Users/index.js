@@ -1,37 +1,48 @@
 // Dependencies
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import map from 'lodash/map';
+// Externals
+import { selectUserAction } from '../UserDetail/actions';
 
 
-const Users = ({ users }) => (
-  <div className="users">
-    {map(users, (user) => (
-      <div className="user">
-        <ul className="info" key={user._id}>
-          <li>Name: {user.name}</li>
-          <li>Email: {user.email}</li>
-          <li>Phone: {user.phone}</li>
-          <li>Address: {user.address}</li>
-        </ul>
-        <ul className="accounts">
-          {map(user.accounts, (account) => (
-            <ul className="account" key={account.id}>
-              <li>Account Type: {account.accountType}</li>
-              <li>Balance: USD{account.balance}</li>
-            </ul>
-          ))}
-        </ul>
-      </div>
-    ))}
-  </div>
-);
+const Users = ({ users }) => {
+  console.log('users', users);
+  return (
+    <ul className="users">
+      {map(users, (user) => (
+        <li key={user._id} className="list-group-item">
+          <Link
+            to={`/users/${user._id}`}
+            onClick={() => this.props.selectUser(user)}
+          >
+            {user.name}
+          </Link>
+       </li>
+      ))}
+    </ul>
+  );
+}
+
+Users.propTypes = {
+  users: PropTypes.arrayOf(PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  })).isRequired,
+};
 
 const mapStateToProps = (state) => {
-  console.log('state', state);
   return {
-    users: state.users.users,
+    users: state.users,
   };
 }
 
-export default connect(mapStateToProps, null)(Users);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    selectUser: (user) => dispatch(selectUserAction(user)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Users);
