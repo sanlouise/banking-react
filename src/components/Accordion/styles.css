@@ -1,0 +1,15 @@
+.collapsible .header {
+  background-color: #000;
+  color: #FFF;
+  cursor: pointer;
+  height: 130px;
+  width: 200px;
+}
+
+.collapsible .body.show {
+  height: 100px;
+}
+
+.collapsible .body.hidden {
+  display: none;
+}
