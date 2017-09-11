@@ -9,19 +9,23 @@ import Accordion from '../../components/Accordion';
 
 const UserDetail = ({ user }) => {
   const collapsibles = map(user.accounts, (account) => ({
-    header: `Account Type: ${account.accountType}, #${account.id}`,
+    header: `Account Type: ${account.accountType}`,
     body: `Balance: ${account.balance}`,
   }));
 
   return (
     <div className="user center">
-      <ul className="info" key={user._id}>
-        <li>Name: {user.name}</li>
-        <li>Email: {user.email}</li>
-        <li>Phone: {user.phone}</li>
-        <li>Address: {user.address}</li>
-      </ul>
-      <Accordion collapsibles={collapsibles} />
+      <div className="row">
+        <div className="col m8 offset-m2">
+          <ul className="info" key={user._id}>
+            <li>Name: {user.name}</li>
+            <li>Email: {user.email}</li>
+            <li>Phone: {user.phone}</li>
+            <li>Address: {user.address}</li>
+            <li><Accordion collapsibles={collapsibles} /></li>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }
